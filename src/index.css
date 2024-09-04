@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Public Sans", sans-serif;
+  box-sizing: border-box;
+}
+dialog::backdrop {
+  background: nonse; /* Removes the built-in backdrop */
+}
