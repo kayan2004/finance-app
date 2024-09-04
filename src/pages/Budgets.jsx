@@ -3,6 +3,8 @@ import InputWithPrefix from "../components/InputWithPrefix";
 import { useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import SpendingSummary from "../components/SpendingSummary";
+import Budget from "../components/Budget";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Budgets = () => {
@@ -11,7 +13,12 @@ const Budgets = () => {
       {
         label: "poll",
         data: [250, 67, 65, 25],
-        backgroundColor: ["rgba(98, 96, 112, 1)", "rgba(242, 205, 172, 1)"],
+        backgroundColor: [
+          " rgba(98, 96, 112, 1)",
+          " rgba(130, 201, 215, 1)",
+          "rgba(242, 205, 172, 1)",
+          "rgba(39, 124, 120, 1)",
+        ],
       },
     ],
   };
@@ -39,15 +46,44 @@ const Budgets = () => {
           + add new Budget
         </button>
       </div>
-      {/* <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
-        <Pot name={`Savings`} total={1500} target={2000}></Pot>
-        <Pot name={`Concert Ticket`} total={1500} target={2000}></Pot>
-        <Pot name={`Gift`} total={1500} target={2000}></Pot>
-        <Pot name={`New Laptop`} total={1500} target={2000}></Pot>
-        <Pot name={`New Laptop`} total={1500} target={2000}></Pot>
-      </div> */}
-      <div className="w-36 h-auto">
-        <Doughnut data={data} options={options}></Doughnut>
+
+      <div className="grid gap-y-8 grid-cols-1 lg:grid-cols-3">
+        {/* first column */}
+        <div className="bg-white p-6 rounded-xl col-span-1 sticky max-h-screen ">
+          <div className="md:grid grid-cols-2 lg:block">
+            <div className="flex items-center justify-center relative mb-6">
+              <div className="w-60 h-auto ">
+                <Doughnut data={data} options={options}></Doughnut>
+              </div>
+              <div className="absolute top-[50%] grid place-items-center translate-y-[-50%]">
+                <strong className="font-bold text-[32px] text-grey900">
+                  $407
+                </strong>
+                <span className="text-[12px] text-grey500">of $975 limit</span>
+              </div>
+            </div>
+            <div className="grid gap-6">
+              <h3 className="font-bold text-grey900 text-[20px]">
+                Spending Summary
+              </h3>
+              <div className="grid gap-3">
+                <SpendingSummary></SpendingSummary>
+                <hr></hr>
+                <SpendingSummary></SpendingSummary>
+                <hr></hr>
+                <SpendingSummary></SpendingSummary>
+                <hr></hr>
+                <SpendingSummary></SpendingSummary>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-8 col-span-2">
+          <Budget></Budget>
+          <Budget></Budget>
+          <Budget></Budget>
+          <Budget></Budget>
+        </div>
       </div>
       <dialog ref={dialogRef} className="w-[90%] h-[50%] p-6 rounded-xl gap-4 ">
         <div className="flex justify-between items-center">
